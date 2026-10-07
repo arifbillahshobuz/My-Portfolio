@@ -34,7 +34,7 @@
  <!-- TESTIMONIAL SECTION END -->
 
  <!-- BLOG SECTION STAR -->
-@include('userInterface.pages.blog')
+<!-- @include('userInterface.pages.blog') -->
  <!-- BLOG SECTION END -->
 
  <!-- CONTACT SECTION START -->
