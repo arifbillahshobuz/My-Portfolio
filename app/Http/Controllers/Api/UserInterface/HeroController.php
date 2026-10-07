@@ -16,12 +16,11 @@ class HeroController extends Controller
     {
         try {
 
-            $hero = Hero::select(['title', 'sub_title', 'description', 'image',])->first();
+            $hero = Hero::select(['title', 'sub_title', 'description', 'image',])->orderBy('id', 'desc')->first();
             $user = User::select(['id', 'email',])->with(['profile:id,user_id,cv,facebook,instagram,linkedin,github,twitter',])
                     ->orderBy('id', 'desc')->first();
 
             $data = [
-                'user_id'     => $user?->id,
                 'title'       => $hero?->title,
                 'sub_title'   => $hero?->sub_title,
                 'description' => $hero?->description,
@@ -67,10 +66,7 @@ class HeroController extends Controller
                     'Md-Arif-Billah-Shobuz-CV.pdf'
                 );
             }
-
-            return ApiResponse::error(
-                error_data: 'CV file not found.'
-            );
+          return redirect()->back();
         } catch (Exception $e) {
 
             return ApiResponse::error(

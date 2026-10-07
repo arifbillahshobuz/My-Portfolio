@@ -62,6 +62,9 @@
 
     <!-- Javascript all file here -->
     @include('userInterface.partials.script')
+    <script>
+        hero();
+    </script>
 </body>
 
 </html>
