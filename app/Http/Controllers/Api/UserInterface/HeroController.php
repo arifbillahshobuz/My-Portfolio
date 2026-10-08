@@ -19,7 +19,7 @@ class HeroController extends Controller
 
             $hero = Hero::select(['title', 'sub_title', 'description', 'image',])->orderBy('id', 'desc')->first();
             $user = User::select(['id', 'email',])->with(['profile:id,user_id,cv,facebook,instagram,linkedin,github,twitter',])->orderBy('id', 'desc')->first();
-            $experiance = Experience::select('id',);
+            $experiance = Experience::select('id','end_job')->get();
             $data = [
                 'title'       => $hero?->title,
                 'sub_title'   => $hero?->sub_title,
