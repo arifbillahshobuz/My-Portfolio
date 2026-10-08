@@ -10,7 +10,8 @@ class DatabaseSeeder extends Seeder
     {
         // First seed users and base tables
         $this->call([
-            UserSeeder::class,
+            // UserSeeder::class,
+            HeroSeeder::class,
             // ServiceSeeder::class,
             // ProjectSeeder::class,
             // ExperienceSeeder::class,
@@ -19,7 +20,6 @@ class DatabaseSeeder extends Seeder
             // TestimonialSeeder::class,
             // BlogSeeder::class,
             // ContactSeeder::class,
-            // HeroSeeder::class,
         ]);
     }
 }
