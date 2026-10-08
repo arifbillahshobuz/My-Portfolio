@@ -11,10 +11,9 @@ class HeroSeeder extends Seeder
     public function run(): void
     {
         Hero::create([
-            'title' => 'I am Arif Billah Shobuz',
-            'sub_title' => 'Softower Developer',
+            'title' => 'Softower Developer',
+            'sub_title' => 'I am Arif Billah Shobuz',
             'description' => 'I am Md. Arif Billah Shobuz, a passionate PHP Laravel Developer with hands-on experience in building web applications, eCommerce platforms, and dynamic websites. With a Diploma in Computer Science & Technology from Kushtia Polytechnic Institute and professional training from Kodeeo Limited, Ostad, and Webcoder-IT, I have honed my skills in Laravel, Git, Blade templates, JWT authentication, and project deployment',
-            'image' => 'hero_main.jpg',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
