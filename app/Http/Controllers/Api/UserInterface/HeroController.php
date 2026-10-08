@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Api\UserInterface;
 
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\Experience;
 use App\Models\Hero;
+use App\Models\Project;
 use App\Models\User;
 use App\Models\UserProfile;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -19,18 +22,40 @@ class HeroController extends Controller
 
             $hero = Hero::select(['title', 'sub_title', 'description', 'image',])->orderBy('id', 'desc')->first();
             $user = User::select(['id', 'email',])->with(['profile:id,user_id,cv,facebook,instagram,linkedin,github,twitter',])->orderBy('id', 'desc')->first();
-            $experiance = Experience::select('id','end_job')->get();
+            //ecperience count
+            $experiences = Experience::select('id', 'start_job', 'end_job')->get();
+            $totalMonths = 0;
+            foreach ($experiences as $experience) {
+
+                $start = Carbon::parse($experience->start_job);
+                $end = Carbon::parse($experience->end_job);
+
+                $totalMonths += $start->diffInMonths($end) + 1;
+            }
+
+            $years = intdiv($totalMonths, 12);
+            $months = $totalMonths % 12;
+
+            $totalExperience = "{$years} . {$months} Months";
+
+            //project count
+            $projects = Project::select('id')->count();
+            //client count
+            $clients = Client::select('id')->count();
+            dd($clients);
             $data = [
-                'title'       => $hero?->title,
-                'sub_title'   => $hero?->sub_title,
+                'title' => $hero?->title,
+                'sub_title' => $hero?->sub_title,
                 'description' => $hero?->description,
-                'image'       => $hero?->image,
-                'cv'          => $user?->profile?->cv,
-                'facebook'    => $user?->profile?->facebook,
-                'instagram'   => $user?->profile?->instagram,
-                'linkedin'    => $user?->profile?->linkedin,
-                'github'      => $user?->profile?->github,
-                'twitter'     => $user?->profile?->twitter,
+                'image' => $hero?->image,
+                'cv' => $user?->profile?->cv,
+                'facebook' => $user?->profile?->facebook,
+                'instagram' => $user?->profile?->instagram,
+                'linkedin' => $user?->profile?->linkedin,
+                'github' => $user?->profile?->github,
+                'twitter' => $user?->profile?->twitter,
+                'experience' => $totalExperience ?? '0',
+                'project' => $projects
             ];
             return ApiResponse::success(message: 'Hero Data Get Successfully', data: $data);
         } catch (Exception $e) {
@@ -66,7 +91,7 @@ class HeroController extends Controller
                     'Md-Arif-Billah-Shobuz-CV.pdf'
                 );
             }
-          return redirect()->back();
+            return redirect()->back();
         } catch (Exception $e) {
 
             return ApiResponse::error(

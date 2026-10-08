@@ -14,12 +14,13 @@ class DatabaseSeeder extends Seeder
             // HeroSeeder::class,
             // ServiceSeeder::class,
             // ProjectSeeder::class,
-            ExperienceSeeder::class,
+            // ExperienceSeeder::class,
             // EducationSeeder::class,
             // SkillSeeder::class,
             // TestimonialSeeder::class,
             // BlogSeeder::class,
             // ContactSeeder::class,
+            ClientSeeder::class,
         ]);
     }
 }
