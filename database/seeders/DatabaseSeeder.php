@@ -11,10 +11,10 @@ class DatabaseSeeder extends Seeder
         // First seed users and base tables
         $this->call([
             // UserSeeder::class,
-            HeroSeeder::class,
+            // HeroSeeder::class,
             // ServiceSeeder::class,
             // ProjectSeeder::class,
-            // ExperienceSeeder::class,
+            ExperienceSeeder::class,
             // EducationSeeder::class,
             // SkillSeeder::class,
             // TestimonialSeeder::class,

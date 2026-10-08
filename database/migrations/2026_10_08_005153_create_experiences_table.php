@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
-            $table->string('company', 50);
-            $table->string('designation', 40);
-            $table->string('owner', 20);
+            $table->string('company', 100);
+            $table->string('designation', 100);
+            $table->string('owner', 20)->nullable();
             $table->date('start_job')->nullable();
             $table->date('end_job')->nullable();
             $table->string('location', 100)->nullable();
