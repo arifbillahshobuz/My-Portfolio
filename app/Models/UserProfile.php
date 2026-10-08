@@ -31,4 +31,7 @@ class UserProfile extends Model
         'designation',
         'user_id'
     ];
+    function user(){
+        return $this->hasOne(UserProfile::class);
+    }
 }
