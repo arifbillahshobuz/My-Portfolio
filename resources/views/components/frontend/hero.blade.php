@@ -30,7 +30,7 @@
             </div>
             <div class="col-md-6 d-none d-md-block">
                 <div class="hero-image-box text-center">
-                    <img id="hero-image" src="#" alt="Arif" />
+                    <img id="hero-image" src="#" alt="" />
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\UserInterface;
 
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
+use App\Models\Experience;
 use App\Models\Hero;
 use App\Models\User;
 use App\Models\UserProfile;
@@ -17,9 +18,8 @@ class HeroController extends Controller
         try {
 
             $hero = Hero::select(['title', 'sub_title', 'description', 'image',])->orderBy('id', 'desc')->first();
-            $user = User::select(['id', 'email',])->with(['profile:id,user_id,cv,facebook,instagram,linkedin,github,twitter',])
-                    ->orderBy('id', 'desc')->first();
-
+            $user = User::select(['id', 'email',])->with(['profile:id,user_id,cv,facebook,instagram,linkedin,github,twitter',])->orderBy('id', 'desc')->first();
+            $experiance = Experience::select('id',);
             $data = [
                 'title'       => $hero?->title,
                 'sub_title'   => $hero?->sub_title,
