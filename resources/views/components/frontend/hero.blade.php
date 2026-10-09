@@ -38,19 +38,19 @@
             <div class="row">
                 <div class="col-6 col-lg-3">
                     <div class="funfact-item d-flex flex-column flex-sm-row flex-wrap align-items-center">
-                        <div class="number"><span class="odometer">2.5</span></div>
+                        <div class="number"><span class="odometer" id="experience">2.5</span></div>
                         <div class="text">Years of <br />Experience</div>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="funfact-item d-flex flex-column flex-sm-row flex-wrap align-items-center">
-                        <div class="number"><span class="odometer">31</span>+</div>
+                        <div class="number"><span class="odometer" id="project">31</span>+</div>
                         <div class="text">Project <br />Completed</div>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="funfact-item d-flex flex-column flex-sm-row flex-wrap align-items-center">
-                        <div class="number"><span class="odometer">17</span></div>
+                        <div class="number"><span class="odometer" id="client">17</span></div>
                         <div class="text">Happy <br />Clients</div>
                     </div>
                 </div>

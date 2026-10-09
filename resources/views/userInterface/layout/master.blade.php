@@ -64,6 +64,7 @@
     @include('userInterface.partials.script')
     <script>
         hero();
+        service();
     </script>
 </body>
 

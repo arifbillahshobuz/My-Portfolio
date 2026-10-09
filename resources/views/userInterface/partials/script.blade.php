@@ -18,4 +18,5 @@
 <script src="{{ asset('userInterface/assets/js/main.js') }}"></script>
 <script src="{{ asset('auth/') }}/js/axios.min.js"></script>
 <script src="{{ asset('userInterface/assets/js/hero.js') }}"></script>
+<script src="{{ asset('userInterface/assets/js/service.js') }}"></script>
 <script src="{{ asset('auth/') }}/js/config.js"></script>

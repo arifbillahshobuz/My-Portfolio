@@ -26,23 +26,17 @@ class HeroController extends Controller
             $experiences = Experience::select('id', 'start_job', 'end_job')->get();
             $totalMonths = 0;
             foreach ($experiences as $experience) {
-
                 $start = Carbon::parse($experience->start_job);
                 $end = Carbon::parse($experience->end_job);
-
                 $totalMonths += $start->diffInMonths($end) + 1;
             }
-
             $years = intdiv($totalMonths, 12);
             $months = $totalMonths % 12;
-
-            $totalExperience = "{$years} . {$months} Months";
-
+            $totalExperience = "{$years}.{$months}";
             //project count
             $projects = Project::select('id')->count();
             //client count
             $clients = Client::select('id')->count();
-            dd($clients);
             $data = [
                 'title' => $hero?->title,
                 'sub_title' => $hero?->sub_title,
@@ -55,7 +49,8 @@ class HeroController extends Controller
                 'github' => $user?->profile?->github,
                 'twitter' => $user?->profile?->twitter,
                 'experience' => $totalExperience ?? '0',
-                'project' => $projects
+                'project' => $projects ?? 0,
+                'client' => $clients ?? 0
             ];
             return ApiResponse::success(message: 'Hero Data Get Successfully', data: $data);
         } catch (Exception $e) {
