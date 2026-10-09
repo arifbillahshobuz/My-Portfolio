@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // UserSeeder::class,
             // HeroSeeder::class,
-            ServiceSeeder::class,
+            // ServiceSeeder::class,
             // ProjectSeeder::class,
             // ExperienceSeeder::class,
             // EducationSeeder::class,
