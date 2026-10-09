@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // UserSeeder::class,
             // HeroSeeder::class,
-            // ServiceSeeder::class,
+            ServiceSeeder::class,
             // ProjectSeeder::class,
             // ExperienceSeeder::class,
             // EducationSeeder::class,
@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             // TestimonialSeeder::class,
             // BlogSeeder::class,
             // ContactSeeder::class,
-            ClientSeeder::class,
+            // ClientSeeder::class,
         ]);
     }
 }

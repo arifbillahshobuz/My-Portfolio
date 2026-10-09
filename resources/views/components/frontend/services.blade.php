@@ -113,6 +113,19 @@
                         <i class="fas fa-arrow-right"></i>
                         <button data-mfp-src="#service-wrapper" class="service-link modal-popup"></button>
                     </div>
+                      <div class="service-item d-flex flex-wrap align-items-center wow fadeInUp"
+                        data-wow-delay=".3s">
+                        <div class="left-box d-flex flex-wrap align-items-center">
+                            <span class="number">08</span>
+                            <h3 class="service-title">Bug Fixing & Maintenance</h3>
+                        </div>
+                        <div class="right-box">
+                            <p>
+                                Troubleshooting and fixing Laravel/PHP website bugs, resolving errors, improving performance, and keeping your website secure, stable, and up to date. </p>
+                        </div>
+                        <i class="fas fa-arrow-right"></i>
+                        <button data-mfp-src="#service-wrapper" class="service-link modal-popup"></button>
+                    </div>
                     <div class="service-item d-flex flex-wrap align-items-center wow fadeInUp"
                         data-wow-delay=".3s">
                         <div class="left-box d-flex flex-wrap align-items-center">
