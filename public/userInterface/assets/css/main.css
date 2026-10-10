@@ -1300,6 +1300,31 @@ body.loaded {
 	left: 0;
 	top: 0;
 }
+#service-wrapper .mfp-close {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    left: auto !important;
+
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+
+    opacity: 1 !important;
+    z-index: 99999 !important;
+}
+
+/* Keep close button inside the modal */
+#service-wrapper {
+    position: relative;
+    box-sizing: border-box;
+}
+
+#service-wrapper .popup_modal_img,
+#service-wrapper .popup_modal_content {
+    max-width: 100%;
+    box-sizing: border-box;
+}
 /* END: Services Section */
 
 /*
