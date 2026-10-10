@@ -69,81 +69,116 @@ class ServiceController extends Controller
     {
         try {
             $request->validate([
-                "title" => "required|string",
-                "description" => "nullable|string",
-                "image" => "nullable|file|mimes:jpg,jpeg,png|max:2048",
-                "icon" => "nullable|file|mimes:jpg,jpeg,png|max:2048"
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'short_description' => 'nullable|string',
+                'process' => 'nullable|string',
+                'image' => 'nullable|file|mimes:jpg,jpeg,png,webp|max:2048',
+                'status' => 'required|in:active,inactive',
+                'sort_order' => 'nullable|integer|min:0',
             ]);
-            $imageName = FileHelper::uploadFile($request->file("image"), 'admin/assets/img/service');
-            $iconName = FileHelper::uploadFile($request->file("icon"), 'admin/assets/img/service');
+
+            $imageName = null;
+
+            if ($request->hasFile('image')) {
+                $imageName = FileHelper::uploadFile(
+                    $request->file('image'),
+                    'admin/assets/img/service'
+                );
+            }
+
             $service = Service::create([
-                "title" => $request->input('title'),
+                'name' => $request->input('name'),
                 'description' => $request->input('description'),
+                'short_description' => $request->input('short_description'),
+                'process' => $request->input('process'),
                 'image' => $imageName,
-                'icon' => $iconName,
+                'status' => $request->input('status'),
+                'sort_order' => $request->input('sort_order', 0),
             ]);
-            return ApiResponse::success(message: "Service Create Success!", data: $service, status_code: 201);
+
+            return ApiResponse::success(
+                message: 'Service Create Success!',
+                data: $service,
+                status_code: 201
+            );
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            throw $e;
         } catch (Exception $e) {
-            return ApiResponse::error(error_data: $e->getMessage());
+            return ApiResponse::error(
+                error_data: $e->getMessage()
+            );
         }
     }
+
+
     public function update(Request $request): JsonResponse
     {
         try {
             $request->validate([
-                "service_id" => "required|exists:services,id",
-                "title" => "nullable|string",
-                "description" => "nullable|string",
-                "image" => "nullable|file|mimes:jpg,jpeg,png|max:2048",
-                "icon" => "nullable|file|mimes:jpg,jpeg,png|max:2048"
+                'service_id' => 'required|integer|exists:services,id',
+                'name' => 'sometimes|required|string|max:255',
+                'description' => 'sometimes|nullable|string',
+                'short_description' => 'sometimes|nullable|string',
+                'process' => 'sometimes|nullable|string',
+                'image' => 'sometimes|nullable|file|mimes:jpg,jpeg,png,webp|max:2048',
+                'status' => 'sometimes|required|in:active,inactive',
+                'sort_order' => 'sometimes|nullable|integer|min:0',
             ]);
-            $service = Service::where('id', $request->input('service_id'))->first();
-            if ($service == null) {
-                return ApiResponse::error(message: "service not found", status_code: 404);
+            $service = Service::find($request->input('service_id'));
+            if (!$service) {
+                return ApiResponse::error(
+                    message: 'Service not found!',
+                    status_code: 404
+                );
             }
-            $imageName =  $service->image;
-            $iconName = $service->icon;
-
-            // Handle image upload
+            $imageName = $service->image;
             if ($request->hasFile('image')) {
-                // Delete old image if exists
-                if ($service->image) {
-                    FileHelper::deleteFile('admin/assets/img/service/' . $service->image);
+                $newImageName = FileHelper::uploadFile(
+                    $request->file('image'),
+                    'admin/assets/img/service'
+                );
+
+                if ($newImageName) {
+                    if ($service->image) {
+                        FileHelper::deleteFile(
+                            'admin/assets/img/service/' . $service->image
+                        );
+                    }
+                    $imageName = $newImageName;
                 }
-                $imageName = FileHelper::uploadFile($request->file("image"), 'admin/assets/img/service');
-            }
-            // Handle icon upload
-            if ($request->hasFile('icon')) {
-                // Delete old icon if exists
-                if ($service->icon) {
-                    FileHelper::deleteFile('admin/assets/img/service/' . $service->icon);
-                }
-                $iconName = FileHelper::uploadFile($request->file("icon"), 'admin/assets/img/service');
             }
             $service->update([
-                'title' =>  $request->filled('title') ? $request->input('title') :  $service->title,
-                'description' => $request->filled('description') ? $request->input('description') :  $service->description,
+                'name' => $request->input('name', $service->name),
+                'description' => $request->input('description', $service->description),
+                'short_description' => $request->input('short_description', $service->short_description),
+                'process' => $request->input('process', $service->process),
                 'image' => $imageName,
-                'icon' => $iconName,
-
+                'status' => $request->input('status', $service->status),
+                'sort_order' => $request->input('sort_order', $service->sort_order),
             ]);
-            return ApiResponse::success(message: "Service Update Success!", data: $service, status_code: 200);
-        } catch (Exception $e) {
-            return ApiResponse::error(error_data: $e->getMessage());
+            return ApiResponse::success(
+                message: 'Service Update Success!',
+                data: $service->fresh(),
+                status_code: 200
+            );
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            throw $e;
+        } catch (\Exception $e) {
+            return ApiResponse::error(
+                error_data: $e->getMessage()
+            );
         }
     }
-        //service delete
+    //service delete
     public function delete(Request $request)
     {
         try {
             $service = Service::findOrFail($request->input('service_id'));
             $service->delete();
-              if ($service->image) {
+            if ($service->image) {
                 FileHelper::deleteFile('admin/assets/img/service/' . $service->image);
             }
-            if ($service->icon) {
-                FileHelper::deleteFile('admin/assets/img/service/' . $service->icon);
-            }  
             return ApiResponse::success(message: 'Service Delete Successfully');
         } catch (Exception $exception) {
             return ApiResponse::error(error_data: 'Service not found', status_code: 404);
