@@ -170,7 +170,7 @@ async function service() {
             new WOW().init();
         }
 
-        console.log('Services loaded successfully:', services);
+    
 
     } catch (error) {
         console.error(

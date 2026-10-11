@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('status', 20)->default('active');            
             $table->foreignId('client_id')->nullable()->constrained('clients')->nullOnDelete();
             $table->foreignId('service_id')->constrained('services')->cascadeOnDelete();
+            $table->unsignedInteger('sort_order')->default(0);            
             $table->timestamps();
 
             $table->index('name');
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->index('service_id');
             $table->index('start_date');
             $table->index('end_date');
+            $table->index('sort_order');
             $table->index('status');
         });
     }

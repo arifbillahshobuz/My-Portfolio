@@ -65,6 +65,7 @@
     <script>
         hero();
         service();
+        project();
     </script>
 </body>
 
