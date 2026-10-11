@@ -112,9 +112,7 @@ async function service() {
                 selectedService.process ?? '';
 
             const image = document.getElementById('modal-service-image');
-
-            const defaultImage = image.dataset.defaultImage;
-             document.getElementById('modal-service-image').src = selectedService.image ? `${window.location.origin}/admin/assets/img/service/${services.image}` : `${window.location.origin}/admin/assets/img/service/service.jpeg`;
+             document.getElementById('modal-service-image').src = selectedService.image ? `${window.location.origin}/admin/assets/img/service/${selectedService.image}` : `${window.location.origin}/admin/assets/img/service/service.jpeg`;
             // Highlight selected service in sidebar
             if (sidebarList) {
                 sidebarList.querySelectorAll('li').forEach(li => {

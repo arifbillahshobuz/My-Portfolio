@@ -110,8 +110,6 @@ class ServiceController extends Controller
             );
         }
     }
-
-
     public function update(Request $request): JsonResponse
     {
         try {

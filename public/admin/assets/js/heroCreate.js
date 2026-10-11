@@ -62,7 +62,6 @@ async function submitHero() {
         }
     });
     console.log(response.data.status);
-    if
 }
 
 // Preview image when file is selected
