@@ -1514,6 +1514,51 @@ body.loaded {
 	-ms-transform: translateY(-50%) rotate(360deg);
 	transform: translateY(-50%) rotate(360deg);
 }
+
+//update
+
+/* Portfolio filter fix - preserve original theme design */
+
+.portfolio-filter .button-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    vertical-align: middle;
+    max-width: 100%;
+}
+
+.portfolio-filter .button-group button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    position: relative;
+    z-index: 2;
+}
+
+.portfolio-filter .button-group .active-bg {
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    left: 0;
+    right: auto;
+    width: 0;
+    height: auto;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 50px;
+}
+
+/* Keep the filter usable on small screens */
+@media (max-width: 767px) {
+    .portfolio-filter .button-group {
+        display: flex;
+        width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+}
 /*  END: Portfolio Section */
 
 /*

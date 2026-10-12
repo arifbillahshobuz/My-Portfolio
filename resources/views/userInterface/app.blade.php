@@ -14,11 +14,11 @@
  <!-- end: Service Popup -->
 
  <!-- PORTFOLIO SECTION START -->
- @include('userInterface.pages.portfolio')
+ @include('userInterface.pages.project')
  <!-- PORTFOLIO SECTION END -->
 
  <!-- start: Portfolio Popup -->
-@include('userInterface.pages.portfolioPopup')
+@include('userInterface.pages.projectPopup')
  <!-- end: Portfolio Popup -->
 
  <!-- RESUME SECTION START -->
