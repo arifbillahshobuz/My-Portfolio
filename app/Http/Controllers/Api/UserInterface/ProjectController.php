@@ -13,7 +13,7 @@ class ProjectController extends Controller
     public function project()
     {
         try {
-            $projects = Project::where('status', 'active')->select('id', 'name', 'image', 'client_id', 'service_id', 'start_date', 'end_date', 'status', 'sort_order')->orderBy('sort_order', 'asc')
+            $projects = Project::where('status', 'completed')->select('id', 'name', 'image', 'client_id', 'service_id', 'start_date', 'end_date', 'status', 'sort_order')->orderBy('sort_order', 'asc')
                 ->with(['client:id,name', 'service:id,name', 'detail:id,project_id,images,description,short_description,live_link'])->get();
             return ApiResponse::success(message: 'Project Data Get Successfully', data: $projects);
         } catch (Exception $e) {
