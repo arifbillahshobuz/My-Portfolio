@@ -40,16 +40,10 @@ async function project() {
         }
 
         // Resolve image URL
-        function projectImage(image, fallback) {
-            if (!image) {
-                return `${window.location.origin}/userInterface/assets/img/portfolio/${fallback}`;
-            }
-
-            if (/^https?:\/\//i.test(image)) {
-                return image;
-            }
-
-            return `${window.location.origin}/userInterface/assets/img/portfolio/${image.replace(/^\/+/, '')}`;
+        function projectImage(image) {
+            return image
+                ? `${window.location.origin}/admin/assets/img/project/${image}`
+                : `${window.location.origin}/admin/assets/img/project/defaultProject.png`;
         }
 
         // Format date
@@ -261,17 +255,13 @@ function openProjectPopup(item) {
         })[char]);
     }
 
-    function imageUrl(image, fallback) {
-        if (!image) {
-            return `${window.location.origin}/userInterface/assets/img/portfolio/${fallback}`;
-        }
 
-        if (/^https?:\/\//i.test(image)) {
-            return image;
-        }
-
-        return `${window.location.origin}/userInterface/assets/img/portfolio/${image.replace(/^\/+/, '')}`;
+    function imageUrl(image) {
+        return image
+            ? `${window.location.origin}/admin/assets/img/project/${image}`
+            : `${window.location.origin}/admin/assets/img/project/defaultProject.png`;
     }
+
 
     const detail = item.detail ?? {};
     const serviceName = item.service?.name ?? 'N/A';
@@ -360,17 +350,28 @@ function openProjectPopup(item) {
     }
 
     // Gallery: retain existing gallery HTML and replace first image
+
     const gallery = popup.querySelector('.portfolio_gallery');
 
     if (gallery) {
         const galleryImages = gallery.querySelectorAll('.gallery_item img');
 
-        if (galleryImages.length && item.image) {
-            galleryImages[0].src = imageUrl(item.image, '1.jpg');
-            galleryImages[0].alt = item.name ?? 'Project';
-        }
+        // Get multiple images from project detail
+        const galleryData = Array.isArray(item.detail?.images)
+            ? item.detail.images
+            : [];
 
-        // Refresh Owl Carousel if already initialized
+        galleryImages.forEach((img, index) => {
+            const galleryImage = galleryData[index];
+
+            img.src = galleryImage
+                ? `${window.location.origin}/admin/assets/img/project/${galleryImage}`
+                : `${window.location.origin}/admin/assets/img/project/defaultProject.png`;
+
+            img.alt = `${item.name ?? 'Project'} image ${index + 1}`;
+        });
+
+        // Refresh Owl Carousel
         if (
             window.jQuery &&
             jQuery.fn.owlCarousel &&
@@ -379,6 +380,7 @@ function openProjectPopup(item) {
             jQuery(gallery).trigger('refresh.owl.carousel');
         }
     }
+
 
     // Open existing Magnific Popup
     if (window.jQuery && jQuery.fn.magnificPopup) {
