@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\UserInterface\Auth\AuthenticationController;
 use App\Http\Controllers\Api\Admin\ServiceController;
 use App\Http\Controllers\Api\Admin\SkillController;
 use App\Http\Controllers\Api\Admin\TestimonialController;
+use App\Http\Controllers\Api\UserInterface\ExperienceController as UserInterfaceExperienceController;
 use App\Http\Controllers\Api\UserInterface\HeroController as UserInterfaceHeroController;
 use App\Http\Controllers\Api\UserInterface\ProjectController as UserInterfaceProjectController;
 use App\Http\Controllers\Api\UserInterface\ServiceController as UserInterfaceServiceController;
@@ -35,6 +36,7 @@ Route::post('/send-otp', [AuthenticationController::class, 'userSendOTP']);
 Route::get('/hero', [UserInterfaceHeroController::class, 'hero']);
 Route::get('/project',[UserInterfaceProjectController::class, 'project']);
 Route::get('/service',[UserInterfaceServiceController::class, 'service']);
+Route::get('/experience',[UserInterfaceExperienceController::class, 'experience']);
 Route::get('/download-cv', [UserInterfaceHeroController::class, 'downloadCV'])->name('cv.download');
 
 

@@ -66,6 +66,7 @@
         hero();
         service();
         project();
+        experience();
     </script>
 </body>
 
