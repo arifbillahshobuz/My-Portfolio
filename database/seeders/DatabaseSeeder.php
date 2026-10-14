@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
             // ServiceSeeder::class,
             // ProjectSeeder::class,
             // ExperienceSeeder::class,
-            // EducationSeeder::class,
+            EducationSeeder::class,
             // SkillSeeder::class,
             // TestimonialSeeder::class,
             // BlogSeeder::class,

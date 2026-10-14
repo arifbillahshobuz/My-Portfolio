@@ -37,6 +37,7 @@ Route::get('/hero', [UserInterfaceHeroController::class, 'hero']);
 Route::get('/project',[UserInterfaceProjectController::class, 'project']);
 Route::get('/service',[UserInterfaceServiceController::class, 'service']);
 Route::get('/experience',[UserInterfaceExperienceController::class, 'experience']);
+Route::get('/education',[UserInterfaceExperienceController::class, 'education']);
 Route::get('/download-cv', [UserInterfaceHeroController::class, 'downloadCV'])->name('cv.download');
 
 

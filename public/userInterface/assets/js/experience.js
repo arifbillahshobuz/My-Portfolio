@@ -1,6 +1,5 @@
 
 async function experience() {
-    alert('exprience start');
     const experienceWidget = document.querySelector(
         '#resume-section .col-md-6:first-child .resume-widget'
     );
@@ -125,6 +124,7 @@ async function experience() {
     }
 
     // Education-এর জন্য HTML element তৈরি করবে
+
     function renderEducations(educations) {
         if (!educationWidget) return;
 
@@ -140,20 +140,42 @@ async function experience() {
 
             const time = document.createElement('div');
             time.className = 'time';
-            time.textContent = item.time;
+
+            // API data অথবা default fallback data
+            if (item.time) {
+                time.textContent = item.time;
+            } else {
+                const start = item.start_date
+                    ? formatMonthYear(item.start_date)
+                    : '';
+
+                const end = item.end_date
+                    ? formatMonthYear(item.end_date)
+                    : 'Present';
+
+                time.textContent = `${start} - ${end}`;
+            }
 
             const title = document.createElement('h3');
             title.className = 'resume-title';
-            title.textContent = item.title;
+            title.textContent = item.title
+                ?? [item.degree, item.field_of_study]
+                    .filter(Boolean)
+                    .join(' - ');
 
             const institute = document.createElement('div');
             institute.className = 'institute';
-            institute.textContent = item.institute;
+
+            institute.textContent = item.institute
+                ?? [item.institution, item.location]
+                    .filter(Boolean)
+                    .join(', ');
 
             resumeItem.append(time, title, institute);
             educationWidget.appendChild(resumeItem);
         });
     }
+
 
     // প্রথমে PDF CV-এর fallback data দেখাবে
     renderExperiences(defaultExperiences);
@@ -178,6 +200,24 @@ async function experience() {
     } catch (error) {
         console.error('Experience API Error:', error);
         // API error হলে PDF CV-এর default data-ই থাকবে
+    }
+       // API থেকে Education data আনা
+    try {
+        const response = await axios.get(
+            `${window.location.origin}/api/education`
+        );
+
+        if (response.data.status === 'success') {
+            const result = response.data.data;
+
+            if (Array.isArray(result) && result.length > 0) {
+                renderEducations(result);
+            }
+        }
+    } catch (error) {
+        console.error('Education API Error:', error);
+
+        // API error হলে default Education data থাকবে
     }
 }
 
