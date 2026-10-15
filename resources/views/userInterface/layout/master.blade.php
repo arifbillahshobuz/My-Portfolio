@@ -67,6 +67,7 @@
         service();
         project();
         experience();
+        skill();
     </script>
 </body>
 

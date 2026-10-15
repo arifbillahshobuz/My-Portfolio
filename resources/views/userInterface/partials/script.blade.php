@@ -21,4 +21,5 @@
 <script src="{{ asset('userInterface/assets/js/service.js') }}"></script>
 <script src="{{ asset('userInterface/assets/js/project.js') }}"></script>
 <script src="{{ asset('userInterface/assets/js/experience.js') }}"></script>
+<script src="{{ asset('userInterface/assets/js/skill.js') }}"></script>
 <script src="{{ asset('auth/') }}/js/config.js"></script>

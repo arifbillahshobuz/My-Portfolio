@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\UserInterface\ExperienceController as UserInterface
 use App\Http\Controllers\Api\UserInterface\HeroController as UserInterfaceHeroController;
 use App\Http\Controllers\Api\UserInterface\ProjectController as UserInterfaceProjectController;
 use App\Http\Controllers\Api\UserInterface\ServiceController as UserInterfaceServiceController;
+use App\Http\Controllers\Api\UserInterface\SkillController as UserInterfaceSkillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ Route::get('/project',[UserInterfaceProjectController::class, 'project']);
 Route::get('/service',[UserInterfaceServiceController::class, 'service']);
 Route::get('/experience',[UserInterfaceExperienceController::class, 'experience']);
 Route::get('/education',[UserInterfaceExperienceController::class, 'education']);
+Route::get('/skill',[UserInterfaceSkillController::class, 'skill']);
 Route::get('/download-cv', [UserInterfaceHeroController::class, 'downloadCV'])->name('cv.download');
 
 
